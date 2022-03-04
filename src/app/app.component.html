@@ -4,7 +4,7 @@
   <input #name type="text" >
 </form>
 
-<ul *ngIf="(ObsTodoService | async) as obsService" >
+<ul *ngIf="(ObsTodoService | async) as obsService">
   <li *ngFor="let item of obsService.items; trackBy: trackById">
     <input type="checkbox" [ngModel]="item.isDone" (ngModelChange)="update({isDone: $event}, item)">
     <input type="text" [ngModel]="item.label" (ngModelChange)="update({label: $event}, item)">
