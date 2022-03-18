@@ -30,7 +30,6 @@ export class TodoListComponent implements OnInit {
   }
 
   update(data: Partial<TodoItem>, ...items: readonly TodoItem[]): void{
-
     this.todoListService.update(data, ...items);
   }
 

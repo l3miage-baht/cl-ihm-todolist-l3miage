@@ -17,9 +17,10 @@
     />
     <label for="toggleAll">Mark all as complete</label>
     <ul class="todo-list">
-      <li *ngFor="let item of obsTodoList.items">
+      <li *ngFor="let item of obsTodoList.items" [class.editing]="idForEditing.isEditing">
         <app-todo-item
           [todoItem]="item"
+          #idForEditing
           (remove)="delete($event)"
           (update)="update($event, item)"
 

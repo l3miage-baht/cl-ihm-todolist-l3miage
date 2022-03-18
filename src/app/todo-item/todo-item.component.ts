@@ -25,10 +25,8 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // delete(item: TodoItem): void{
-  //   console.log('hehehe :: '+ JSON.stringify(item));
-  //   this.remove.emit(item);
-  //   //this.todoListService.delete(item);
-  // }
+  whenBlur(): void{
+
+  }
 
 }

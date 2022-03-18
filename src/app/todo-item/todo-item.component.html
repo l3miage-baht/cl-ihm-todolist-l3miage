@@ -17,9 +17,11 @@
 </div>
 
 
-<form >
+<form (ngSubmit)="update.emit({label:newTextInput.value});isEditing = false" >
   <input  #newTextInput
+  [value]="todoItem.label"
           name      = "newTextInput"
           class     = "edit"
+          (blur)="update.emit({label:newTextInput.value});isEditing = false"
   />
 </form>
