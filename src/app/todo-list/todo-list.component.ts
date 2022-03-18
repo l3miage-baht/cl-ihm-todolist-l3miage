@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { TodolistService, TodoList, TodoItem } from './../todolist.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
@@ -11,9 +11,17 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class TodoListComponent implements OnInit {
 
   readonly ObsTodoService: Observable<TodoList>
+  ObsTodoServiceFiltered = new BehaviorSubject<TodoList>({label: 'L3 MIAGE', items: [] });
 
   constructor(private todoListService: TodolistService) {
     this.ObsTodoService = this.todoListService.observable;
+
+    this.ObsTodoService.subscribe((TDS) => {
+      this.ObsTodoServiceFiltered.next(TDS)
+    })
+
+    this.ObsTodoServiceFiltered
+
   }
 
   ngOnInit(): void {
@@ -21,8 +29,7 @@ export class TodoListComponent implements OnInit {
   // create(...labels: readonly string[])
   addTask(...v: readonly string[]): void{
     this.todoListService.create(...v);
-    console.log("I'm in add task " + v);
-
+    //console.log("I'm in add task " + v);
   }
 
   delete(...items: readonly TodoItem[]): void{
@@ -33,8 +40,23 @@ export class TodoListComponent implements OnInit {
     this.todoListService.update(data, ...items);
   }
 
-  // get ObsTodoService(): Observable<TodoList>{
-  //   return this.todoListService.observable;
-  // }
+  restantes(items: readonly TodoItem[]): number{
+    return items.filter( item => item.isDone === false ).length
+  }
+
+  filterAllItems(items: readonly TodoItem[]): void{
+
+  }
+
+  filterActivesItems(items: readonly TodoItem[]): void{
+    items.filter(item => item.isDone === false)
+  }
+
+  filterCompletedItems(): void{
+    //const fConpleteItems = this.ObsTodoService.subscribe((TDL) => {
+      //console.log(TDL.items.filter(item => item.isDone === true))
+   // })
+  }
+
 
 }

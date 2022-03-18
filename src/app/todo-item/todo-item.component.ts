@@ -25,8 +25,5 @@ export class TodoItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  whenBlur(): void{
-
-  }
 
 }

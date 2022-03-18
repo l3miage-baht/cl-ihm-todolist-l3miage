@@ -17,7 +17,10 @@
     />
     <label for="toggleAll">Mark all as complete</label>
     <ul class="todo-list">
-      <li *ngFor="let item of obsTodoList.items" [class.editing]="idForEditing.isEditing">
+      <li
+            *ngFor="let item of obsTodoList.items"
+            [class.editing]="idForEditing.isEditing"
+            [class.completed]="item.isDone">
         <app-todo-item
           [todoItem]="item"
           #idForEditing
@@ -30,19 +33,21 @@
       </li>
     </ul>
   </section>
-
+  <pre>
+    {{ ObsTodoServiceFiltered | async | json }}
+  </pre>
 
   <footer class="footer">
-    <span class="todo-count"><strong></strong> restantes</span>
+    <span class="todo-count"><strong *ngIf="restantes(obsTodoList.items)>0"> {{ restantes(obsTodoList.items) }} </strong> restantes</span>
     <ul class="filters">
       <li>
-        <a class="filterAll">Tous</a>
+        <a class="filterAll" (click)="filterAllItems(obsTodoList.items)">Tous</a>
       </li>
       <li>
-        <a class="filterActives">Actifs</a>
+        <a class="filterActives" (click)="filterActivesItems(obsTodoList.items)">Actifs</a>
       </li>
       <li>
-        <a class="filterCompleted">Complétés</a>
+        <a class="filterCompleted" (click)="filterCompletedItems()">Complétés</a>
       </li>
     </ul>
     <button class="clear-completed">Supprimer cochées</button>

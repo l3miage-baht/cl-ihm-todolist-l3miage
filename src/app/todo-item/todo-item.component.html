@@ -2,8 +2,8 @@
   <input  class = "toggle"
           type  = "checkbox"
           name  = "done"
-          [ngModel]="todoItem.isDone"
-          (ngModelChange)="update.emit({isDone:$event})"
+          [ngModel]       = "todoItem.isDone"
+          (ngModelChange) = "update.emit({isDone:$event})"
   />
 
   <label
@@ -17,11 +17,11 @@
 </div>
 
 
-<form (ngSubmit)="update.emit({label:newTextInput.value});isEditing = false" >
+<form (ngSubmit)="isEditing = false" >
   <input  #newTextInput
-  [value]="todoItem.label"
+          [value]   = "todoItem.label"
           name      = "newTextInput"
           class     = "edit"
-          (blur)="update.emit({label:newTextInput.value});isEditing = false"
+          (blur)    = "update.emit({label:newTextInput.value}); isEditing = false"
   />
 </form>
