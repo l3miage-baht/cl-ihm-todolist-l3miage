@@ -1,6 +1,8 @@
-import { Observable, tap, BehaviorSubject } from 'rxjs';
+import { Observable, tap, BehaviorSubject, switchMap, Subject, combineLatest, map } from 'rxjs';
 import { TodolistService, TodoList, TodoItem } from './../todolist.service';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Type } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-todo-list',
@@ -8,25 +10,41 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./todo-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+
 export class TodoListComponent implements OnInit {
 
   readonly ObsTodoService: Observable<TodoList>
+
+
+
   ObsTodoServiceFiltered = new BehaviorSubject<TodoList>({label: 'L3 MIAGE', items: [] });
+  ObsTodoServiceState = new BehaviorSubject<string>('filterAll');
+
 
   constructor(private todoListService: TodolistService) {
+
     this.ObsTodoService = this.todoListService.observable;
 
-    this.ObsTodoService.subscribe((TDS) => {
-      this.ObsTodoServiceFiltered.next(TDS)
-    })
-
-    this.ObsTodoServiceFiltered
+    combineLatest([this.ObsTodoService, this.ObsTodoServiceState]).pipe(
+      map(([OTSFiltered, OTLSate]) => {
+        if(OTLSate === "filterActives"){
+          return OTSFiltered.items.filter(item => item.isDone === false)
+        }else if (OTLSate === "filterCompleted"){
+          return OTSFiltered.items.filter(item => item.isDone === true)
+        }else if(OTLSate === "deleteChecked"){
+          return OTSFiltered.items.filter(i => i.isDone === true ? this.delete(i) : i)
+        }else{
+          return OTSFiltered.items.filter(item => item)
+        }
+      })
+    ).subscribe( (i) => { this.ObsTodoServiceFiltered.next({label: 'L3 MIAGE', items: i})   })
 
   }
 
   ngOnInit(): void {
   }
-  // create(...labels: readonly string[])
+
   addTask(...v: readonly string[]): void{
     this.todoListService.create(...v);
     //console.log("I'm in add task " + v);
@@ -44,19 +62,17 @@ export class TodoListComponent implements OnInit {
     return items.filter( item => item.isDone === false ).length
   }
 
-  filterAllItems(items: readonly TodoItem[]): void{
-
+  setFilterState(state: string): void{
+    this.ObsTodoServiceState.next(state)
   }
 
-  filterActivesItems(items: readonly TodoItem[]): void{
-    items.filter(item => item.isDone === false)
+  trackById(n: number, i: TodoItem): number{
+    return i.id
   }
 
-  filterCompletedItems(): void{
-    //const fConpleteItems = this.ObsTodoService.subscribe((TDL) => {
-      //console.log(TDL.items.filter(item => item.isDone === true))
-   // })
-  }
+  // supprimerCochees(): void{
+  //   this.ObsTodoService.
+  // }
 
 
 }

@@ -1,4 +1,4 @@
-<section class="todoapp" *ngIf="ObsTodoService | async as obsTodoList">
+<section class="todoapp" *ngIf="ObsTodoServiceFiltered | async as obsTodoList">
   <header class="header">
     <h1> {{obsTodoList.label}} </h1>
     <form (ngSubmit)="addTask(lab.value); lab.value=''">
@@ -18,7 +18,7 @@
     <label for="toggleAll">Mark all as complete</label>
     <ul class="todo-list">
       <li
-            *ngFor="let item of obsTodoList.items"
+            *ngFor="let item of obsTodoList.items; trackBy: trackById"
             [class.editing]="idForEditing.isEditing"
             [class.completed]="item.isDone">
         <app-todo-item
@@ -33,23 +33,20 @@
       </li>
     </ul>
   </section>
-  <pre>
-    {{ ObsTodoServiceFiltered | async | json }}
-  </pre>
 
   <footer class="footer">
     <span class="todo-count"><strong *ngIf="restantes(obsTodoList.items)>0"> {{ restantes(obsTodoList.items) }} </strong> restantes</span>
     <ul class="filters">
       <li>
-        <a class="filterAll" (click)="filterAllItems(obsTodoList.items)">Tous</a>
+        <a class="filterAll" (click)="setFilterState('filterAll')">Tous</a>
       </li>
       <li>
-        <a class="filterActives" (click)="filterActivesItems(obsTodoList.items)">Actifs</a>
+        <a class="filterActives" (click)="setFilterState('filterActives')">Actifs</a>
       </li>
       <li>
-        <a class="filterCompleted" (click)="filterCompletedItems()">Complétés</a>
+        <a class="filterCompleted" (click)="setFilterState('filterCompleted')">Complétés</a>
       </li>
     </ul>
-    <button class="clear-completed">Supprimer cochées</button>
+    <button class="clear-completed" (click)="setFilterState('deleteChecked')" >Supprimer cochées</button>
   </footer>
 </section>
