@@ -1,20 +1,36 @@
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { TodolistService, TodoList, TodoItem } from './todolist.service';
-import { Component, OnDestroy } from '@angular/core';
-import { Observable, tap, BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserAuthService } from './user-auth.service';
+
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnDestroy, OnInit {
+
+
 
   title = 'l3m-tpX-todolist-angular-y2022';
-  //private subj = new BehaviorSubject<TodoList>({label: 'L3 MIAGE', items: [] });
-   //bs = new BehaviorSubject<TodoList>({label: 'L3 MIAGE', items: [] })
 
-  constructor(private todoListService: TodolistService){
+  constructor(
+    private todoListService: TodolistService,
+    private auth: AngularFireAuth,
+    private userAuthService: UserAuthService,
+    private formBuilder: FormBuilder,
+    private router: Router
+    ){
+  }
 
+  ngOnInit(): void {
+      // this.auth.onAuthStateChanged(
+      //   (user) => { user ? this.isAuth = true : this.isAuth = false }
+      // )
   }
 
   ngOnDestroy(): void {

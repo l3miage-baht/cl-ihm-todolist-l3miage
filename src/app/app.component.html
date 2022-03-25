@@ -1,3 +1,44 @@
+
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+  <!--
+    <div>
+    <ul>
+      <li routerLinkActive="active" *ngIf="!isAuth">
+        <a routerLink="/sign-in">Connexion</a>
+      </li>
+    </ul>
+
+    <ul>
+      <li routerLinkActive="active" *ngIf="!isAuth">
+        <a routerLink="/sign-up">Inscription</a>
+      </li>
+
+      <li  style="cursor:pointer" *ngIf="isAuth">
+        <a (click)="onSignOut()"  > Deconnexion</a>
+      </li>
+    </ul>
+  </div>
+   -->
+
+
+
+
+<!--
+  <div *ngIf="auth.user | async as user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <button (click)="login()">Login with Google</button>
+</ng-template>
+
+--------------
 <h1>TP TodoList</h1>
 <hr>
 
@@ -22,3 +63,4 @@
 <pre>
   {{ ObsTodoService | async | json }}
 </pre>
+-->
