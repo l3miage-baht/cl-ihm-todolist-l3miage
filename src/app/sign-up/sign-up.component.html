@@ -1,18 +1,13 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <h2>Inscription nouvelle utilisateur</h2>
-    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" id="email" class="form-control" formControlName="email">
-      </div>
-      <div class="form-group">
-        <label for="pwd">Mot de passe</label>
-        <input type="password" id="pwd" class="form-control" formControlName="pwd">
-      </div>
-      <button class="btn btn-primary" type="submit" [disabled]="signUpForm.invalid">Inscription</button>
-    </form>
-    <p class="text-danger"> {{ msgError }} </p>
-  </div>
 
-</div>
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <h1>Inscription</h1>
+
+    <label><b>Adresse e-mail</b></label>
+    <input type="text" class="form-control" formControlName="email" placeholder="Entrer une adresse e-mail">
+
+    <label><b>Mot de passe</b></label>
+    <input type="password" class="form-control" formControlName="pwd"  placeholder="Entrer un mot de passe">
+
+    <button type="submit" class="btn-submit" [disabled]="signUpForm.invalid"> INSCRIPTION </button>
+    <button class="btn-submit" (click)="loginWithGoogle()" > CONNEXION AVEC UN COMPTE WITH GOOGLE </button>
+

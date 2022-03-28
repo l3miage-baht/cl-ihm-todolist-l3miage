@@ -1,3 +1,5 @@
+import { UserAuthService } from './../user-auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, tap, BehaviorSubject, switchMap, Subject, combineLatest, map } from 'rxjs';
 import { TodolistService, TodoList, TodoItem } from './../todolist.service';
 import { Component, OnInit, ChangeDetectionStrategy, Type } from '@angular/core';
@@ -15,6 +17,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Type } from '@angular/core'
 export class TodoListComponent implements OnInit {
 
   readonly ObsTodoService: Observable<TodoList>
+  //readonly UbsFirebaseUserService: Observable<firebase.auth.UserCredential | Promise<firebase.auth.UserCredential>>
 
 
 
@@ -22,7 +25,10 @@ export class TodoListComponent implements OnInit {
   ObsTodoServiceState = new BehaviorSubject<string>('filterAll');
 
 
-  constructor(private todoListService: TodolistService) {
+  constructor(private todoListService: TodolistService, public firebaseUserAuthService: UserAuthService) {
+    console.log("Constructeur todo list ***********************************")
+    // this.UbsFirebaseUserService = this.us.observableFirebaseUser;
+    // this.UbsFirebaseUserService.pipe(map(u => console.log("&&&&&&&&&&&&&&&&&&&&&&&&&& " +u)))
 
     this.ObsTodoService = this.todoListService.observable;
 

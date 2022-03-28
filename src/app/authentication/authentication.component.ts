@@ -52,17 +52,20 @@ export class AuthenticationComponent implements OnInit {
     )
   }
 
-  onSignOut(): void{
-    this.userAuthService.signOutUser()
+  loginWithGoogle(): void {
+    this.userAuthService.createUserWithGoogle().then(
+      (r) => { this.router.navigate(['/todo-list']) },
+      (e) => { this.msgError = "Erreur de login avec google : " +e }
+    )
   }
 
-  loginWithGoogle() {
-    this.userAuthService.createUserWithGoogle();
-  }
+  // logout() {
+  //   this.auth.signOut();
+  // }
 
-  logout() {
-    this.auth.signOut();
-  }
+  // onSignOut(): void{
+  //   this.userAuthService.signOutUser()
+  // }
 
 
 }

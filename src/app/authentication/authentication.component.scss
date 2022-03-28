@@ -31,7 +31,7 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-button[type=submit] {
+button[class=btn-submit] {
   background-color: #d3d56b;
   //color: white;
   color: white;
@@ -42,7 +42,7 @@ button[type=submit] {
   cursor: pointer;
   width: 100%;
 }
-button[type=submit]:hover {
+button[class=btn-submit]:hover {
   background-color: white;
   //color: #d3d56b;
   color: #d3d56b;

@@ -1,6 +1,6 @@
 
   <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-    <h1>Authentification</h1>
+    <h1>Connexion</h1>
 
     <label><b>Adresse e-mail</b></label>
     <input type="text" class="form-control" formControlName="email" placeholder="Entrer une adresse e-mail">
@@ -8,8 +8,15 @@
     <label><b>Mot de passe</b></label>
     <input type="password" class="form-control" formControlName="pwd"  placeholder="Entrer un mot de passe">
 
-    <button type="submit" > LOGIN </button>
-    <button type="submit" (click)="loginWithGoogle()" > SIGN IN WITH GOOGLE </button>
+    <button type="submit" class="btn-submit" [disabled]="authForm.invalid"> CONNEXION </button>
+    <button class="btn-submit" (click)="loginWithGoogle()" > CONNEXION AVEC UN COMPTE WITH GOOGLE </button>
+    <a routerLink="sign-up"> S'inscrire avec un email et un mot de pass ? </a>
+    <!--
     <button type="submit" *ngIf="!authForm.invalid"> SIGN IN WITH EMAIL AND PASSWORD </button>
-    <p> {{ msgError}} </p>
+
+      <li routerLinkActive="active" *ngIf="!isAuth">
+        <a routerLink="/sign-in">Connexion</a>
+      </li>
+    -->
+    <p style="color: red"> {{ msgError}} </p>
   </form>

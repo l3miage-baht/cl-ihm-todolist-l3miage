@@ -13,16 +13,14 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 import { AngularFireModule } from '@angular/fire/compat';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'sign-in', component: SignInComponent},
   {path: 'todo-list', component: TodoListComponent},
-  {path: '/', component: AuthenticationComponent}
+  {path: '', component: AuthenticationComponent}
 ]
 
 @NgModule({
@@ -30,7 +28,6 @@ const routes: Routes = [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-      SignInComponent,
       SignUpComponent,
       AuthenticationComponent
    ],

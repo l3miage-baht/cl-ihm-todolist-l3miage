@@ -1,3 +1,12 @@
+<div *ngIf="firebaseUserAuthService.auth.user| async as firebaseUser" class="userConnecter">
+  <h2>
+    <img [src]=firebaseUser.photoURL  alt="No Picture"/>
+    {{ firebaseUser.displayName?firebaseUser.displayName:firebaseUser.email  }} <span>connecté</span>
+  </h2>
+
+  <button (click)="firebaseUserAuthService.signOutUser()"> <b>Se déconnecter</b> </button>
+</div>
+
 <section class="todoapp" *ngIf="ObsTodoServiceFiltered | async as obsTodoList">
   <header class="header">
     <h1> {{obsTodoList.label}} </h1>

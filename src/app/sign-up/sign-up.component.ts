@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   signUpForm!: FormGroup;
-  msgError!: string;
+  msgError: string = '';
 
   constructor(
     private userAuthService: UserAuthService,
@@ -34,8 +34,15 @@ export class SignUpComponent implements OnInit {
     const pwd = this.signUpForm.get('pwd')?.value;
 
     this.userAuthService.creatNewUser(email, pwd).then(
-      () => { this.router.navigate(['todo-list']) },
+      () => { this.router.navigate(['/todo-list']) },
       (err) => { this.msgError = err }
+    )
+  }
+
+  loginWithGoogle(): void {
+    this.userAuthService.createUserWithGoogle().then(
+      (r) => { this.router.navigate(['/todo-list']) },
+      (e) => { this.msgError = "Erreur de login avec google : " +e }
     )
   }
 
