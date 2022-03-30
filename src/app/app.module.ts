@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
 
 
   ],
