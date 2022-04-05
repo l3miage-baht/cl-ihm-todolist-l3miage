@@ -19,11 +19,8 @@ export class TodoListComponent implements OnInit {
   readonly ObsTodoService: Observable<TodoList>
   //readonly UbsFirebaseUserService: Observable<firebase.auth.UserCredential | Promise<firebase.auth.UserCredential>>
 
-
-
   ObsTodoServiceFiltered = new BehaviorSubject<TodoList>({label: 'L3 MIAGE', items: [] });
   ObsTodoServiceState = new BehaviorSubject<string>('filterAll');
-
 
   constructor(private todoListService: TodolistService, public firebaseUserAuthService: UserAuthService) {
     console.log("Constructeur todo list ***********************************")
@@ -75,10 +72,5 @@ export class TodoListComponent implements OnInit {
   trackById(n: number, i: TodoItem): number{
     return i.id
   }
-
-  // supprimerCochees(): void{
-  //   this.ObsTodoService.
-  // }
-
 
 }

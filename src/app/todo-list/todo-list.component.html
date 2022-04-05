@@ -3,10 +3,8 @@
     <img [src]=firebaseUser.photoURL  alt="No Picture"/>
     {{ firebaseUser.displayName?firebaseUser.displayName:firebaseUser.email  }} <span>connecté</span>
   </h2>
-
   <button (click)="firebaseUserAuthService.signOutUser()"> <b>Se déconnecter</b> </button>
 </div>
-
 <section class="todoapp" *ngIf="ObsTodoServiceFiltered | async as obsTodoList">
   <header class="header">
     <h1> {{obsTodoList.label}} </h1>
@@ -18,7 +16,6 @@
               #lab/>
     </form>
   </header>
-
   <section class="main">
     <input  class="toggle-all"
             type="checkbox"
@@ -30,19 +27,17 @@
             *ngFor="let item of obsTodoList.items; trackBy: trackById"
             [class.editing]="idForEditing.isEditing"
             [class.completed]="item.isDone">
+
         <app-todo-item
           [todoItem]="item"
           #idForEditing
           (remove)="delete($event)"
           (update)="update($event, item)"
-
         >
-
         </app-todo-item>
       </li>
     </ul>
   </section>
-
   <footer class="footer">
     <span class="todo-count"><strong *ngIf="restantes(obsTodoList.items)>0"> {{ restantes(obsTodoList.items) }} </strong> restantes</span>
     <ul class="filters">
