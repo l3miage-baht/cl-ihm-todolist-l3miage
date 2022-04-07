@@ -4,10 +4,14 @@
     {{ firebaseUser.displayName?firebaseUser.displayName:firebaseUser.email  }} <span>connecté</span>
   </h2>
   <button (click)="firebaseUserAuthService.signOutUser()"> <b>Se déconnecter</b> </button>
+  <hr>
+  <button (click)="exportToJson()"> <b>export to JSON</b> </button>
 </div>
+
 <section class="todoapp" *ngIf="ObsTodoServiceFiltered | async as obsTodoList">
   <header class="header">
     <h1> {{obsTodoList.label}} </h1>
+
     <form (ngSubmit)="addTask(lab.value); lab.value=''">
       <input  name        = "newTodoInput"
               class       = "new-todo"

@@ -21,7 +21,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'todo-list', component: TodoListComponent},
-  {path: '', component: AuthenticationComponent}
+  {path: '', component: AuthenticationComponent},
+  {path: '**', redirectTo: ''}
 ]
 
 @NgModule({
