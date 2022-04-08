@@ -151,13 +151,13 @@ export class TodolistService implements OnDestroy {
     this.afa.authState.pipe(
      switchMap( U => {
        if(U){
-         console.log("user U is not null");
+         //console.log("user U is not null");
 
          return this.afs.doc<TodoList>(`${U.uid}/default`).valueChanges().pipe(
            map( t => t ?? {label: "Default", items: []})
          );
        }else{
-         console.log("user U is false");
+         //console.log("user U is false");
 
          return of({label: "unlogged", items: []})
        }
@@ -169,7 +169,7 @@ export class TodolistService implements OnDestroy {
     // distinctUntilChanged(),
     // shareReplay()
   ).subscribe(S =>  {
-    console.log(S.TDL);
+    //console.log(S.TDL);
     this.subj.next(S.TDL as TodoList)
   })
   //  this.observablee = combineLatest([

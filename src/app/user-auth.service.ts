@@ -64,7 +64,7 @@ signOutUser(): Promise<void>{
   return this.auth.signOut().then(
     () => { this.router.navigate(['/']) },
     (e) => {
-      console.log("Erreur lors de la deconnection => " +e);
+      //console.log("Erreur lors de la deconnection => " +e);
       this.router.navigate(['/']);
     }
   )

@@ -23,7 +23,7 @@ export class TodoListComponent implements OnInit {
   ObsTodoServiceState = new BehaviorSubject<string>('filterAll');
 
   constructor(private todoListService: TodolistService, public firebaseUserAuthService: UserAuthService) {
-    console.log("Constructeur todo list ***********************************")
+    //console.log("Constructeur todo list ***********************************")
     // this.UbsFirebaseUserService = this.us.observableFirebaseUser;
     // this.UbsFirebaseUserService.pipe(map(u => console.log("&&&&&&&&&&&&&&&&&&&&&&&&&& " +u)))
 

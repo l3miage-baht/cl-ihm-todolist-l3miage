@@ -1,3 +1,4 @@
+import { AuthenticationGuardService } from './authentication-guard.service';
 import { UserAuthService } from './user-auth.service';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,7 +21,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
-  {path: 'todo-list', component: TodoListComponent},
+  {path: 'todo-list',canActivate: [AuthenticationGuardService], component: TodoListComponent},
   {path: '', component: AuthenticationComponent},
   {path: '**', redirectTo: ''}
 ]
